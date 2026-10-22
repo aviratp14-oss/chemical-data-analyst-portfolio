@@ -249,6 +249,9 @@ def footer(pid, extra=''):
 
 SC, SH = d('[Scenario Name]'), d('FORMAT([World Share], "0%")')
 NE25 = f'CALCULATE([Non-energy Share], Dim_Year[Year] = 2025)'
+# uses with no battery at all (grease, glass, medicines): the like-for-like comparison with USGS's non-battery share
+NB25 = ('CALCULATE(DIVIDE(CALCULATE(SUM(Fact_Demand[Demand_t_LCE]), Dim_Sector[Sector] = "Industry"), '
+        'CALCULATE(SUM(Fact_Demand[Demand_t_LCE]), REMOVEFILTERS(Dim_Sector))), Dim_Year[Year] = 2025)')
 
 # page 1
 top_band('Overview', 'India lithium outlook, 2025 to 2040')
@@ -257,7 +260,7 @@ headline('Overview', ['India will need ', F('[Growth to 2040]', '0'), ' times mo
             '"From " & [First Gap Year] & ", there isn\'t enough for EVs and storage.")')],
          ['Thousand tonnes of lithium carbonate equivalent (kt LCE) a year. ', SC, " case. India gets ", SH, " of the world's lithium."])
 things('Overview', [
-    ([F(NE25, '0%')], [["of India's lithium in 2025 went to phones, laptops,"], ['grease, glass and defence, not clean energy.'], ['Worldwide it is 12%.']]),
+    ([F(NE25, '0%')], [["of India's lithium in 2025 went to phones, laptops,"], ['grease, glass and defence, not clean energy.'], ['Non-battery uses alone: ', F(NB25, '0%'), ', as worldwide (12%).']]),
     ([F('CALCULATE([Energy Coverage], Dim_Year[Year] = 2040)', '0%')], [['of EV and storage demand can be met in 2040.'],
                                                                         ['Phones and grease are served first because'], ['they can pay more.']]),
     ([d('IF([No Lever Gap t] < 1, "No gap", [Best Lever])')],
@@ -277,9 +280,9 @@ things('WhoUsesIt', [
      [['a year goes into phones assembled in India for'], ['export. That lithium leaves the country and never'], ['comes back for recycling.']]),
     ([F('DIVIDE(CALCULATE([Sub-sector 2025 t], Dim_Sector[Sub_Sector] = "IND_Grease"), 1000)', '0.0'), ' kt'],
      [['goes into lubricating grease. 77% of the lithium'], ['hydroxide behind it came from Russia in 2023.']]),
-    (['12%'], [['is the non-energy share worldwide (USGS). India is'],
-               ['higher because its EV fleet is still small. It drops to'],
-               [F('CALCULATE([Non-energy Share], Dim_Year[Year] = 2040)', '0%'), ' by 2040.']]),
+    ([F(NB25, '0%')], [['goes to grease, glass and medicines, close to the'],
+                       ['12% of world lithium used outside batteries (USGS).'],
+                       ['Most of the rest is phone and laptop batteries.']]),
 ])
 footer('WhoUsesIt', 'Defence is an estimate, since no public data exists.')
 

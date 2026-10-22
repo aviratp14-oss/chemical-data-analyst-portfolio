@@ -13,7 +13,7 @@ I built a bottom-up model of India's lithium demand from 2025 to 2040 across 17 
 **Key findings (Base case)**
 
 1. Demand grows from about **16 kt of lithium carbonate equivalent (LCE) in 2025 to 64 kt in 2030, 136 kt in 2035 and 266 kt in 2040**. EVs are 85% of the 2040 figure.
-2. Today **38% of India's lithium goes to uses outside the energy transition**, compared with 12% worldwide. Most of it goes to consumer electronics and phones made for export.
+2. Today **38% of India's lithium goes to uses outside the energy transition**. Most of it is batteries in phones (including phones made for export), laptops and power banks. Uses with no battery at all take 11%, close to the 12% USGS reports for non-battery uses worldwide.
 3. If India can reach 3% of world lithium supply, a **shortfall appears in 2034**. By 2040, **a quarter of EV and storage demand cannot be met**. In the High case the gap opens in 2028.
 4. Domestic mining will not close this gap. At the official grade of 583 ppm, the **entire Reasi resource contains about 18 kt LCE, roughly 1.6 months of India's 2035 demand**.
 5. The 2022 battery rules require 20% recycled content in new batteries by 2030-31. **Domestic scrap can cover only about 5% in 2030**, because most of today's batteries retire after 2032.
@@ -29,7 +29,7 @@ I built a bottom-up model of India's lithium demand from 2025 to 2040 across 17 
 India has committed to 500 GW of non-fossil capacity by 2030, an EV push across every vehicle segment, and battery storage of 236 GWh by 2031-32 under the CEA's National Electricity Plan. All three depend on lithium-ion batteries. Today India has:
 
 - **no operating lithium mine.** The Salal-Haimana block in Reasi failed to attract bidders, and the only awarded lithium block (Katghora, Chhattisgarh) is at the composite licence stage;
-- **no commercial refining.** Lithium carbonate and hydroxide are all imported, about 2-3 kt LCE a year;
+- **no commercial refining.** Lithium carbonate and hydroxide are all imported, about 1.5-2 kt LCE a year in 2022-24;
 - **almost no cathode or cell production.** Only 1.4 GWh of the 50 GWh ACC PLI target was commissioned by October 2025, and cell import dependence is close to 100% (IEEFA, 2026).
 
 Nearly every link in the chain, from mine to cell, sits outside India. Policy debate treats lithium as an EV and storage issue, but the same imported cells and chemicals also serve electronics, industry and defence. There has been no India-specific estimate of how demand splits across these uses, or of where the gap will hit first.
@@ -58,7 +58,7 @@ The three scenarios (Low, Base, High) change EV adoption, the storage build-out,
 
 **Demand grows sixteen-fold, and EVs dominate after 2030.** In the Base case demand reaches 266 kt LCE in 2040, about 6% of world supply that year. Electric cars are the biggest single use at 106 kt LCE. Two-wheelers come next because of their volume, even with packs of about 3.5 kWh. Storage rises sharply as the CEA build-out lands: about 17 kt LCE in 2030 alone.
 
-**Non-energy uses are bigger than most people assume.** In 2025 phones sold in India, phones made for export, power banks, laptops, grease, glass, ceramics, medicines and defence took about 6 kt LCE, 38% of the total. Two parts of this are worth noting:
+**Non-energy uses are bigger than most people assume.** In 2025 phones sold in India, phones made for export, power banks, laptops, grease, glass, ceramics, medicines and defence took about 6 kt LCE, 38% of the total. About 4.2 kt of that (26%) is batteries in phones, laptops and power banks. Grease, glass and medicines, which use lithium without a battery, take 1.7 kt (11%), close to the 12% non-battery share worldwide. Two parts of this are worth noting:
 
 - **Export assembly.** Phones assembled in India for export pull about 1.2 kt LCE a year in imported cells. That lithium leaves the country, so it never comes back for recycling.
 - **Lubricating grease.** Grease uses about 1.1 kt LCE of lithium hydroxide a year. In 2023, 77% of that hydroxide by value came from Russia, which makes it a supply-risk issue as well as a demand one.

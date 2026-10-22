@@ -24,7 +24,7 @@ The tabs at the top are page buttons. In Power BI Desktop hold Ctrl and click; i
 
 **Three things to know:**
 
-- **38%** of India's lithium in 2025 went to phones, laptops, grease, glass and defence, not clean energy. Worldwide it's 12%.
+- **38%** of India's lithium in 2025 went to phones, laptops, grease, glass and defence, not clean energy. Non-battery uses alone are 11%, about the same as the 12% worldwide.
 - **75%** of EV and storage demand can be met in 2040. Phones and grease are served first because they can pay more.
 - **Overseas assets** is the biggest single fix. It closes 50 of the 63 kt gap in 2040.
 
@@ -40,7 +40,7 @@ Try the High case: the gap opens in 2028 and growth to 2040 is 26 times. Try 5% 
 
 - **1.2 kt** a year goes into phones assembled in India for export. That lithium leaves the country and never comes back for recycling.
 - **1.1 kt** goes into lubricating grease. 77% of the lithium hydroxide behind it came from Russia in 2023.
-- **12%** is the non-energy share worldwide (USGS). India is higher because its EV fleet is still small. It drops to 5% by 2040.
+- **11%** goes to grease, glass and medicines, close to the 12% of world lithium used outside batteries (USGS). Most of the rest of the 38% is phone and laptop batteries.
 
 ## Page 3: Where it comes from
 

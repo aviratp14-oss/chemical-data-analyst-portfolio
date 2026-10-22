@@ -299,7 +299,7 @@ chain = [
     ("1 Exploration", "Early", "G3 inferred resource at Reasi; one hard-rock block under composite licence", "S02; S20"),
     ("2 Mining", "None", "No operating lithium mine; auctions draw few bidders", "S21"),
     ("3 Beneficiation and processing", "R&D only", "CSIR-NML lab work; clay-hosted ore not proven commercially anywhere", "S05; S21"),
-    ("4 Refining (carbonate, hydroxide)", "None operating", "One refinery MoU (Gujarat); ~2-3 kt LCE/yr of chemicals imported", "S05; S06"),
+    ("4 Refining (carbonate, hydroxide)", "None operating", "One refinery MoU (Gujarat); ~1.5-2 kt LCE/yr of chemicals imported (2022-24)", "S05; S06"),
     ("5 Cathode active material", "Negligible", "China holds 98% of NMC and 48% of LFP cathode output", "S16"),
     ("6 Cell manufacturing", "Starting", "1.4 GWh commissioned under ACC PLI by Oct 2025; cell import dependence close to 100%", "S16"),
     ("7 Pack assembly and use", "Established", "Packs assembled in India for EVs, storage and electronics", "S16"),
