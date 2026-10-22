@@ -130,7 +130,7 @@ Gap closed in 2040 by each lever: overseas assets 50 kt, sodium-ion 30 kt, explo
 |---|---|---|---|---|
 | Low | none | 145 | 0 | 100% |
 | Base | 2034 | 266 | 63 | 75% |
-| High | 2028 | 430 | 155 | 63% |
+| High | 2028 | 430 | 155 | 62% |
 
 ## Checks I ran
 

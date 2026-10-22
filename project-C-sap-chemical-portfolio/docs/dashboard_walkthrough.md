@@ -81,13 +81,13 @@ Units: M = million US dollars, kt = thousand tonnes, t = tonnes. Margin is gross
 | Card | Value (2025) | What it means |
 |---|---|---|
 | Spent buying chemicals we make | $10.2M | Purchase orders for 2-EH, n-butanol and PM, the three bought materials whose CAS number matches a material we produce |
-| Avoidable cost | $2.1M, $10.6M since 2022 | The part we could have covered from our own surplus and spare stock, times the gap between the purchase price and our own cost plus freight |
+| Avoidable cost | $1.6M, $9.4M since 2022 | The part we could have covered ourselves. Volume from surplus is valued at purchase price minus the trader price we were getting and freight; volume from spare stock at purchase price minus our standard cost and freight |
 | 2-EH surplus sold to a trader | 3,946 t, 26% below list | What Pasadena sold to the spot trader while Lake Charles was buying |
 | Duplicate material records | 3 | Pairs of material numbers with the same CAS number, one made and one bought |
 
 **2-EH per year:** red is what Lake Charles bought from outside, blue is what Pasadena sold cheaply to a trader. In 2025 and 2026 the surplus sold off is bigger than what was bought in. The company was selling its own 2-EH at a discount and buying the same chemical back at full price.
 
-**Avoidable cost by material:** 2-EH is $1.94M of the $2.1M in 2025. n-Butanol ($0.11M) and PM ($0.01M) are the same mistake on a smaller scale. Each bar is labelled with both material numbers, bought = made.
+**Avoidable cost by material:** 2-EH is $1.53M of the $1.64M in 2025. n-Butanol ($0.11M) is the same mistake on a smaller scale. PM shows nothing in 2025, because Lake Charles needed all its spare PM to make PMA; it adds up to $17k since 2022. Each bar is labelled with both material numbers, bought = made.
 
 **Easy to misread:** "spent" isn't the same as "wasted". Only the avoidable cost is money the company could have kept. The rest was volume Pasadena couldn't have supplied anyway.
 
@@ -109,6 +109,6 @@ Units: M = million US dollars, kt = thousand tonnes, t = tonnes. Margin is gross
 
 **Customers to call first:** every at-risk customer, plus anyone who lapsed in the last 12 months, sorted by revenue. It shows how many days since their last order next to their usual gap, so a rep can see at a glance how far off rhythm they are. This is the list I'd send to sales every Monday.
 
-**At risk or lapsed, by plasticizer profile:** loyal DOTP buyers churn the least (11%). Customers who switched to DINP are at 24%, more than twice that, and they have the highest at-risk rate of any group (14%). This ties the page back to page 2: once a customer starts buying on price, they keep shopping around.
+**At risk or lapsed, by plasticizer profile:** loyal DOTP buyers churn the least (1 of 9). Switchers (5 of 21), mixed buyers (3 of 12) and DINP-from-the-start buyers (3 of 13) all sit around 25%, and switchers have the highest at-risk rate (3 of 21). The groups are small, so treat this as something to watch rather than a result.
 
 **Easy to misread:** the spot trader and returns are left out, because neither has a normal ordering rhythm. "Usual gap" is the median number of days between that customer's orders, so a weekly buyer and a quarterly buyer are judged against themselves, not against a fixed 90-day rule.

@@ -82,11 +82,27 @@ table Fact_Make_vs_Buy
 
 		annotation SummarizationSetBy = Automatic
 
+	column Spot_Price_USD_per_kg
+		dataType: double
+		lineageTag: 288a186b-ccb2-5627-8d59-09a671ddca89
+		summarizeBy: sum
+		sourceColumn: Spot_Price_USD_per_kg
+
+		annotation SummarizationSetBy = Automatic
+
 	column Own_Stock_kg
 		dataType: double
 		lineageTag: 77eafb1a-fc22-5468-967d-55280698794d
 		summarizeBy: sum
 		sourceColumn: Own_Stock_kg
+
+		annotation SummarizationSetBy = Automatic
+
+	column Internal_Use_kg
+		dataType: double
+		lineageTag: feda015f-8766-5603-b0fa-91dab801fac1
+		summarizeBy: sum
+		sourceColumn: Internal_Use_kg
 
 		annotation SummarizationSetBy = Automatic
 
@@ -103,6 +119,22 @@ table Fact_Make_vs_Buy
 		lineageTag: fac9e62f-5661-513c-b9a0-f5b0975b8e16
 		summarizeBy: sum
 		sourceColumn: Available_InHouse_kg
+
+		annotation SummarizationSetBy = Automatic
+
+	column Covered_From_Surplus_kg
+		dataType: double
+		lineageTag: a544d5be-1e01-54ab-87e5-1937115314ad
+		summarizeBy: sum
+		sourceColumn: Covered_From_Surplus_kg
+
+		annotation SummarizationSetBy = Automatic
+
+	column Covered_From_Stock_kg
+		dataType: double
+		lineageTag: b1523789-8efa-5ce8-b60a-5f7eb9648142
+		summarizeBy: sum
+		sourceColumn: Covered_From_Stock_kg
 
 		annotation SummarizationSetBy = Automatic
 
@@ -136,7 +168,7 @@ table Fact_Make_vs_Buy
 				let
 				    Source = Csv.Document(File.Contents(DataFolder & "Fact_Make_vs_Buy.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
 				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
-				    Typed = Table.TransformColumnTypes(Promoted, {{"Month", type date}, {"CAS_No", type text}, {"Bought_Material_Id", type text}, {"Made_Material_Id", type text}, {"Buying_Plant", type text}, {"Making_Plant", type text}, {"Bought_kg", type number}, {"Spend_USD", type number}, {"Buy_Price_USD_per_kg", type number}, {"InHouse_Cost_USD_per_kg", type number}, {"Own_Stock_kg", type number}, {"Surplus_Sold_Spot_kg", type number}, {"Available_InHouse_kg", type number}, {"Coverable_kg", type number}, {"Avoidable_Cost_USD", type number}, {"Pair_Label", type text}}, "en-US")
+				    Typed = Table.TransformColumnTypes(Promoted, {{"Month", type date}, {"CAS_No", type text}, {"Bought_Material_Id", type text}, {"Made_Material_Id", type text}, {"Buying_Plant", type text}, {"Making_Plant", type text}, {"Bought_kg", type number}, {"Spend_USD", type number}, {"Buy_Price_USD_per_kg", type number}, {"InHouse_Cost_USD_per_kg", type number}, {"Spot_Price_USD_per_kg", type number}, {"Own_Stock_kg", type number}, {"Internal_Use_kg", type number}, {"Surplus_Sold_Spot_kg", type number}, {"Available_InHouse_kg", type number}, {"Covered_From_Surplus_kg", type number}, {"Covered_From_Stock_kg", type number}, {"Coverable_kg", type number}, {"Avoidable_Cost_USD", type number}, {"Pair_Label", type text}}, "en-US")
 				in
 				    Typed
 

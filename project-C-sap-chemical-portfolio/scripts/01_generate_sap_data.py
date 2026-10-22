@@ -99,6 +99,21 @@ M = [
     ("PM_P", "10000109", "CLEANING SOLVENT - GLYCOL ETHER", "ROH", "MRO", "1010", "107-98-2", 1.90),
 ]
 mat = pd.DataFrame(M, columns=["key", "matnr", "desc", "mtype", "mgroup", "plant", "cas", "price"])
+
+# GHS signal word per chemical, from supplier SDSs (US OSHA HCS / EU CLP); "Not classified" = no signal word
+D, W, NC = "Danger", "Warning", "Not classified"
+GHS_SIGNAL = {
+    "DOTP": NC, "DINP": NC, "DOA": NC, "TOTM": NC,
+    "2EH": W, "NBUOH": D, "IBUOH": D, "2EHACID": D,          # n-/isobutanol: Eye Dam. 1; 2-EH acid: Repr. 1B
+    "2EHA": W, "BA": W, "BUAC": W, "ETAC": D, "PM": W, "DPM": NC, "PMA": W,
+    "NBAL": D,
+    "MEG": W, "DEG": W, "TEG": NC, "MPG": NC, "NPG": D, "TMP": W, "MMA": D,
+    "ACET": D, "MEK": D, "IPA": D, "ESBO": NC,
+    "PROPYLENE": D, "H2": D, "TPA": NC, "INA": D, "PA": D, "ADIP": W, "TMA": D, "TIPT": W,
+    "AA": D, "MEHQ": W, "H2SO4": D, "ACOH": D, "ETOH": D, "MEOH": D, "PO": D, "NAOH": D,
+    "2EH_P": W, "NBUOH_P": D, "PM_P": W,
+}
+
 assert all(cas_ok(c) for c in mat.cas), "bad CAS check digit"
 K = mat.set_index("key")
 
@@ -481,9 +496,10 @@ for _, r in mat.iterrows():
     elif rng.random() < 0.08:
         cas = "CAS " + cas
     cls.append(dict(Material=r["matnr"], Class_Type="001", Class="CHEM_IDENT", Characteristic="CAS_NUMBER", Value=cas))
-    if rng.random() < 0.7:
+    if rng.random() < 0.7:  # about 30% of materials have no signal word maintained, as in a real extract
+        rng.choice(["Warning", "Danger", ""])  # keeps the random stream (and so every other file) unchanged
         cls.append(dict(Material=r["matnr"], Class_Type="001", Class="CHEM_IDENT", Characteristic="GHS_SIGNAL_WORD",
-                        Value=rng.choice(["Warning", "Danger", ""])))
+                        Value=GHS_SIGNAL[r["key"]]))
 pd.DataFrame(cls).to_csv(os.path.join(RAW, "03_Material_Classification_CAS.csv"), index=False)
 
 # 04 BOM (STPO)

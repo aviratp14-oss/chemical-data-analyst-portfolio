@@ -31,7 +31,7 @@ This matters a lot for carbonate. The flagged rows were about half of the report
 
 **India as its own partner.** One 2024 row lists India as the partner (a re-import). Kept in value and flagged.
 
-After cleaning, imports work out to about 2 to 3 kt LCE a year. The 2022 to 2024 average sets the 2025 baseline for grease (90% of hydroxide), glass and ceramics (50% of carbonate) and pharma and other uses (the rest). The grease figure, 1,080 t LCE, agrees within 5% with what an NLGI grease survey implies (about 1,031 t LCE).
+After cleaning, imports work out to about 1.5 to 3.3 kt LCE a year (1.5 to 2 kt in 2022 to 2024). The 2022 to 2024 average sets the 2025 baseline for grease (90% of hydroxide), glass and ceramics (50% of carbonate) and pharma and other uses (the rest). The grease figure, 1,080 t LCE, agrees within 5% with what an NLGI grease survey implies (about 1,031 t LCE).
 
 ## 2. EV sales (seven sources)
 

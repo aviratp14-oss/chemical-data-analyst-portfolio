@@ -34,7 +34,9 @@ DOTP (Chemical A) and DINP (Chemical B) are both PVC plasticizers with the same 
 - DOTP's share fell from **76% in 2022 to 21% in 2026**. DINP overtook it in early 2025.
 - **21 of 55 plasticizer customers switched** from DOTP to DINP. Nine stayed loyal to DOTP, 13 bought mostly DINP from the start, and 12 buy a mix.
 - The margin lost on their DINP volume (compared with selling them DOTP) is **$3.9M since 2022**, and $1.7M of it was in 2025 alone.
-- Two sales reps give DINP an average **8% discount, against about 3% for everyone else**. My read is that this is an incentive problem, not a market one: if reps are paid on volume, the cheaper product is the easier sale.
+- The shift is company-wide. Among customers of the reps who discount normally, DOTP's share still fell from **76% in 2022 to 24% in 2026**.
+- Two sales reps give DINP an average **8% discount, against about 3% for everyone else**, and their customers moved furthest: DOTP is down to **9%** of their plasticizer volume. They handle 6 of the 21 switchers and 19% of DINP volume.
+- My read: the market is moving towards DINP for this company, and the two reps' discounting speeds it up. If reps are paid on volume, the cheaper product is the easier sale, so the incentive plan is worth looking at, but it isn't the whole story.
 
 ### How to prevent it
 1. **Pay reps on margin, not volume.** A volume bonus rewards pushing the lower-margin product.
@@ -64,14 +66,16 @@ The same thing happened twice more on a smaller scale: n-butanol bought as "BUTA
 - For each pair and month, compared:
   - what was bought outside and the price paid
   - our own cost: standard cost plus $0.04/kg freight between the plants
-  - how much we could have supplied ourselves: surplus sold to the trader, plus stock above one month of our own sales
-- Avoidable cost = the volume we could have covered x (purchase price - our cost).
+  - how much we could have supplied ourselves: surplus sold to the trader, plus stock above one month of what Pasadena needs anyway (sales to regular customers plus the 2-EH it uses itself for DOTP, DOA and TOTM)
+- Avoidable cost, in two parts:
+  - volume covered from surplus x (purchase price - the trader price we were getting - freight). The surplus was already earning the trader price, so that's all we'd save.
+  - volume covered from spare stock x (purchase price - our standard cost - freight).
 
 ### What I found
 - **$10.2M spent in 2025** buying chemicals the company already makes.
-- **$2.1M of that was avoidable in 2025, and $10.6M since 2022.** 2-EH is almost all of it.
-- In 2025 plant 1020 bought **2,419 t of 2-EH** at about $1.98/kg, while plant 1010 sold **3,946 t of its own 2-EH to a trader at 26% below list**. Its own cost was about $1.18/kg including freight.
-- The problem got worse as Problem 1 grew: less DOTP means less 2-EH used in-house, so more surplus.
+- **$1.6M of that was avoidable in 2025, and $9.4M since 2022.** 2-EH is almost all of it ($1.5M in 2025).
+- In 2025 plant 1020 bought **2,419 t of 2-EH** at about $1.98/kg, while plant 1010 sold **3,946 t of its own 2-EH to a trader at $1.52/kg, 26% below list**. Its own cost was about $1.18/kg including freight.
+- The surplus sold to the trader grew five-fold, from 743 t in 2022 to 3,946 t in 2025, as Problem 1 grew: less DOTP means less 2-EH used in-house. The avoidable cost didn't grow with it, because Pasadena already had enough spare stock in 2022 to cover almost every tonne Lake Charles bought. What changed is how the spare 2-EH left the plant: sold off cheap instead of sitting in the tank.
 
 ### How to prevent it
 1. **Make CAS number a mandatory, validated field** for every chemical material. Enforce the format and the check digit when the record is created.
@@ -98,10 +102,11 @@ Some customers stop ordering without saying anything. A simple "no order in 90 d
 ### What I found
 - Of 160 regular customers, **128 are active, 8 are at risk and 24 have lapsed** since 2022 (4 of them in the last 12 months).
 - **$2.3M a year is at risk** from the 8 at-risk customers, and **$5.0M a year has been lost** to the 4 recent lapses.
-- Customers who switched to DINP have the **highest at-risk rate (14%)**. Loyal DOTP buyers churn the least: none are at risk, and 11% have lapsed, against 24% of switchers who are at risk or lapsed. Once a customer buys on price, they keep shopping on price.
+- Customers who switched to DINP have the **highest at-risk rate: 3 of 21 (14%)**. Of the 9 loyal DOTP buyers, none are at risk and 1 has lapsed.
+- Taking at risk and lapsed together, switchers (5 of 21, 24%) look about the same as customers who buy a mix (3 of 12, 25%) or mostly DINP from the start (3 of 13, 23%). These groups are small, so this is a hint worth watching, not a finding.
 
 ### How to prevent it
 1. **Give reps a weekly "call first" list:** at-risk customers sorted by revenue, from the dashboard.
 2. **Alert on the customer's own rhythm,** not a fixed number of days.
 3. **Review lost customers.** Ask lapsed customers why they left, and record the reason in SAP (CRM activity) so it can be reported.
-4. **Protect the loyal DOTP base.** These customers are the least likely to leave and the most profitable, so they're worth keeping on supply agreements.
+4. **Protect the loyal DOTP base.** These customers are the most profitable per kg, and so far only 1 of 9 has left, so they're worth keeping on supply agreements.

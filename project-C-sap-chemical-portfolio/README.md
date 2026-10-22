@@ -17,10 +17,10 @@ I cleaned the SAP exports in Excel, cross-checked them and built the scenario ta
 ## What I found
 
 - **DOTP went from 76% of plasticizer volume in 2022 to 21% in 2026.** DINP overtook it in early 2025. DOTP earns $0.62 a kg at standard cost and DINP $0.24.
-- **21 of 55 plasticizer customers switched from DOTP to DINP**, and that cost $3.9M of margin since 2022 ($1.7M in 2025 alone). Two sales reps give DINP an 8% average discount against about 3% for everyone else. My read is that this is about how reps are paid, not the market: on a volume bonus, the cheaper product is the easier sale.
-- **The company spent $10.2M in 2025 buying chemicals it already makes, and $2.1M of that was avoidable** ($10.6M since 2022). Almost all of it is 2-EH. In 2025 Lake Charles bought 2,419 t of 2-EH at about $1.98/kg, while Pasadena sold 3,946 t of its own to a trader at 26% below list. Pasadena's cost, freight included, was about $1.18/kg.
+- **21 of 55 plasticizer customers switched from DOTP to DINP**, and that cost $3.9M of margin since 2022 ($1.7M in 2025 alone). The shift happened across the whole sales team: DOTP's share fell from 76% to 24% even among customers of reps who discount normally. Two reps stand out on top of that. They give DINP an 8% average discount against about 3% for everyone else, and their customers moved furthest (DOTP down to 9%). So the discounting sped the shift up, but it doesn't explain all of it.
+- **The company spent $10.2M in 2025 buying chemicals it already makes, and $1.6M of that was avoidable** ($9.4M since 2022). Almost all of it is 2-EH. In 2025 Lake Charles bought 2,419 t of 2-EH at about $1.98/kg, while Pasadena sold 3,946 t of its own to a trader at $1.52/kg, 26% below list. Pasadena's cost, freight included, was about $1.18/kg.
 - **The root cause is master data, not purchasing.** A buyer created a second material record for 2-EH under a different name, and its CAS number was saved without dashes (`104767`), so neither a name search nor a CAS lookup found the original. Once I cleaned the CAS numbers, the same check found two more pairs (n-butanol and PM).
-- **8 customers are at risk and 4 lapsed in the last 12 months.** That's $2.3M a year at risk and $5.0M a year already lost. Customers who switched to DINP are the most likely to be at risk (14%), and loyal DOTP buyers are the least likely to leave. Once a customer buys on price, they keep shopping on price.
+- **8 customers are at risk and 4 lapsed in the last 12 months.** That's $2.3M a year at risk and $5.0M a year already lost. Customers who switched to DINP have the highest at-risk rate (3 of 21), and only 1 of the 9 loyal DOTP buyers has lapsed. The groups are small, though, and customers who buy a mix of both are at risk or lapsed just as often as switchers, so I wouldn't read a pattern into it yet.
 
 The full write-up, with what I'd change in SAP to stop each problem happening again, is in [docs/business_problems.md](docs/business_problems.md).
 
@@ -43,7 +43,7 @@ The data is simulated, but I tried hard to make it behave like a real SAP S/4HAN
 
 | What's real | What's simulated |
 |---|---|
-| 46 real chemicals with their real CAS numbers (check digits validated) | The company, plants, customers, suppliers and sales reps |
+| 43 real chemicals (46 material records) with their real CAS numbers (check digits validated) and GHS signal words taken from supplier safety data sheets | The company, plants, customers, suppliers and sales reps |
 | Recipes based on real chemistry (2-EH + terephthalic acid makes DOTP, 2-EH + acrylic acid makes 2-EH acrylate, and so on) | Every sales order, purchase order, production order and stock figure |
 | Monthly price movement from the US producer price index for basic organic chemicals (FRED series PCU325199325199) | Base prices per chemical (realistic ballpark, not quotes) |
 
@@ -80,7 +80,7 @@ project-C-sap-chemical-portfolio/
 
 - The data is simulated. The chemicals, recipes and price trend are real, but every order, customer and supplier is invented, so the findings show the method, not a real company.
 - Margin is at standard cost, not actual cost.
-- The make-vs-buy saving assumes the two plants can ship to each other at $0.04/kg and that the grades are interchangeable. In real life you'd check the specs first.
+- The make-vs-buy saving assumes the two plants can ship to each other at $0.04/kg and that the grades are interchangeable. In real life you'd check the specs first. Surplus that was going to the trader is valued at the trader price, not at standard cost, because the company was already earning that price on it.
 - Customer health is a rule based on order rhythm, not a predictive model. It's meant to give sales a short call list, not a churn probability.
 - 2026 only runs to September, so the cards compare January to September with the same months a year earlier.
 
