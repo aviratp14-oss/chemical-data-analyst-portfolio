@@ -257,33 +257,53 @@ fs = fact_sales.assign(Month=pd.to_datetime(fact_sales["Order_Date"]).dt.to_peri
 fp = fact_po.assign(Month=pd.to_datetime(fact_po["PO_Date"]).dt.to_period("M").dt.to_timestamp())
 stk = fact_stock.assign(Month=pd.to_datetime(fact_stock["Month"]))
 spot_ids = set(dim_cust.loc[dim_cust["Customer_Type"] == "Spot trader", "Customer_Id"])
+prod_m = fact_prod.assign(Month=pd.to_datetime(fact_prod["Start_Date"]).dt.to_period("M").dt.to_timestamp())
 rows = []
 for p in pairs.itertuples():
     b = fp[fp["Material_Id"] == p.Bought_Material_Id].groupby("Month").agg(Bought_kg=("Qty_kg", "sum"), Spend_USD=("Value_USD", "sum"))
     own = stk[(stk["Material_Id"] == p.Made_Material_Id) & (stk["Plant"] == p.Making_Plant)].set_index("Month")["Stock_kg"]
     sold = fs[fs["Material_Id"] == p.Made_Material_Id]
     demand = sold.groupby("Month")["Qty_kg"].sum()
-    spot = sold[sold["Customer_Id"].isin(spot_ids)].groupby("Month")["Qty_kg"].sum()
-    m = b.join(own.rename("Own_Stock_kg"), how="left").join(demand.rename("Own_Sales_kg"), how="left").join(spot.rename("Surplus_Sold_Spot_kg"), how="left").fillna(0)
+    spot_lines = sold[sold["Customer_Id"].isin(spot_ids)]
+    spot = spot_lines.groupby("Month")["Qty_kg"].sum()
+    spot_value = spot_lines.groupby("Month")["Net_Value_USD"].sum()
+    # the making plant also uses the chemical itself (e.g. 2-EH into DOTP, DOA and TOTM)
+    use = fact_bom[(fact_bom["Component_Material_Id"] == p.Made_Material_Id) & (fact_bom["Plant"] == p.Making_Plant)]
+    internal = (prod_m.merge(use, left_on=["Material_Id", "Plant"], right_on=["Parent_Material_Id", "Plant"])
+                .assign(kg=lambda d: d["Confirmed_Qty_kg"] * d["Component_kg_per_kg"]).groupby("Month")["kg"].sum())
+    m = (b.join(own.rename("Own_Stock_kg"), how="left").join(demand.rename("Own_Sales_kg"), how="left")
+         .join(internal.rename("Internal_Use_kg"), how="left").join(spot.rename("Surplus_Sold_Spot_kg"), how="left")
+         .join(spot_value.rename("Spot_Value_USD"), how="left").fillna(0))
     m = m.reset_index()
     m["Year"] = m["Month"].dt.year
     m["InHouse_Cost_USD_per_kg"] = [std_key.get((p.Made_Material_Id, y)) + FREIGHT_USD_PER_KG for y in m["Year"]]
     m["Buy_Price_USD_per_kg"] = m["Spend_USD"] / m["Bought_kg"]
-    # in-house supply available that month: surplus dumped to the spot trader + stock above one month of own sales
-    m["Available_InHouse_kg"] = m["Surplus_Sold_Spot_kg"] + (m["Own_Stock_kg"] - (m["Own_Sales_kg"] - m["Surplus_Sold_Spot_kg"])).clip(lower=0)
-    m["Coverable_kg"] = np.minimum(m["Bought_kg"], m["Available_InHouse_kg"])
-    m["Avoidable_Cost_USD"] = (m["Coverable_kg"] * (m["Buy_Price_USD_per_kg"] - m["InHouse_Cost_USD_per_kg"]).clip(lower=0)).round(2)
+    m["Spot_Price_USD_per_kg"] = (m["Spot_Value_USD"] / m["Surplus_Sold_Spot_kg"]).where(m["Surplus_Sold_Spot_kg"] > 0)
+    # in-house supply available that month: surplus dumped to the spot trader, plus stock above one month of
+    # what the plant needs anyway (sales to regular customers + its own use in other products)
+    spare = (m["Own_Stock_kg"] - (m["Own_Sales_kg"] - m["Surplus_Sold_Spot_kg"]) - m["Internal_Use_kg"]).clip(lower=0)
+    m["Available_InHouse_kg"] = m["Surplus_Sold_Spot_kg"] + spare
+    m["Covered_From_Surplus_kg"] = np.minimum(m["Bought_kg"], m["Surplus_Sold_Spot_kg"])
+    m["Covered_From_Stock_kg"] = np.minimum(m["Bought_kg"] - m["Covered_From_Surplus_kg"], spare)
+    m["Coverable_kg"] = m["Covered_From_Surplus_kg"] + m["Covered_From_Stock_kg"]
+    # surplus already earned the trader price, so diverting it saves only purchase price - trader price - freight;
+    # spare stock is valued at standard cost + freight
+    gain_surplus = (m["Buy_Price_USD_per_kg"] - m["Spot_Price_USD_per_kg"].fillna(0) - FREIGHT_USD_PER_KG).clip(lower=0)
+    gain_stock = (m["Buy_Price_USD_per_kg"] - m["InHouse_Cost_USD_per_kg"]).clip(lower=0)
+    m["Avoidable_Cost_USD"] = (m["Covered_From_Surplus_kg"] * gain_surplus + m["Covered_From_Stock_kg"] * gain_stock).round(2)
     for c in ("CAS_No", "Bought_Material_Id", "Made_Material_Id", "Buying_Plant", "Making_Plant"):
         m[c] = getattr(p, c)
     rows.append(m)
 mvb = pd.concat(rows, ignore_index=True)
 fact_mvb = mvb[["Month", "CAS_No", "Bought_Material_Id", "Made_Material_Id", "Buying_Plant", "Making_Plant", "Bought_kg",
-                "Spend_USD", "Buy_Price_USD_per_kg", "InHouse_Cost_USD_per_kg", "Own_Stock_kg", "Surplus_Sold_Spot_kg",
-                "Available_InHouse_kg", "Coverable_kg", "Avoidable_Cost_USD"]].copy()
+                "Spend_USD", "Buy_Price_USD_per_kg", "InHouse_Cost_USD_per_kg", "Spot_Price_USD_per_kg", "Own_Stock_kg",
+                "Internal_Use_kg", "Surplus_Sold_Spot_kg", "Available_InHouse_kg", "Covered_From_Surplus_kg",
+                "Covered_From_Stock_kg", "Coverable_kg", "Avoidable_Cost_USD"]].copy()
 fact_mvb["Month"] = fact_mvb["Month"].dt.date
-for c in ("Buy_Price_USD_per_kg", "InHouse_Cost_USD_per_kg"):
+for c in ("Buy_Price_USD_per_kg", "InHouse_Cost_USD_per_kg", "Spot_Price_USD_per_kg"):
     fact_mvb[c] = fact_mvb[c].round(4)
-for c in ("Bought_kg", "Spend_USD", "Own_Stock_kg", "Surplus_Sold_Spot_kg", "Available_InHouse_kg", "Coverable_kg"):
+for c in ("Bought_kg", "Spend_USD", "Own_Stock_kg", "Internal_Use_kg", "Surplus_Sold_Spot_kg", "Available_InHouse_kg",
+          "Covered_From_Surplus_kg", "Covered_From_Stock_kg", "Coverable_kg"):
     fact_mvb[c] = fact_mvb[c].round(1)
 tot = fact_mvb.groupby("Bought_Material_Id")[["Spend_USD", "Avoidable_Cost_USD"]].sum()
 pairs = pairs.merge(tot, left_on="Bought_Material_Id", right_index=True, how="left")

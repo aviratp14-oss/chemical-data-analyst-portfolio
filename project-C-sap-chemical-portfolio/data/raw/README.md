@@ -12,7 +12,7 @@ use it to make plasticizers and acrylates.
 
 | Real | Simulated |
 |---|---|
-| Chemical names and CAS numbers (46 real chemicals, CAS check digits validated) | Company, plants, customers, suppliers, sales reps (all fictional names) |
+| Chemical names, CAS numbers and GHS signal words (43 real chemicals on 46 material records, CAS check digits validated, signal words from supplier safety data sheets) | Company, plants, customers, suppliers, sales reps (all fictional names) |
 | Bills of materials based on real chemistry (2-EH + terephthalic acid -> DOTP, 2-EH + acrylic acid -> 2-EH acrylate, and so on) | Every order, PO, production order and stock figure |
 | Monthly price movement from the FRED producer price index for basic organic chemicals (series PCU325199325199) | Base prices per chemical (realistic ballpark, not quotes) |
 
